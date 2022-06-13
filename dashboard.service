@@ -1,0 +1,12 @@
+[Unit]
+Description=Tableau de bord PAEC
+After=network.target
+
+[Service]
+User=dashboard
+Group=dashboard
+WorkingDirectory=/home/dashboard/PAEC
+ExecStart=/home/dashboard/PAEC/.venv/bin/gunicorn
+
+[Install]
+WantedBy=multi-user.target
