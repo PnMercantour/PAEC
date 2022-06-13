@@ -1,5 +1,7 @@
 wsgi_app = 'app:server'
 
+# change binding when using a reverse proxy
+bind= "0.0.0.0:9001"
 # logging
 accesslog = 'log/access.log'
 errorlog = 'log/error.log'
