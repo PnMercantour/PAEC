@@ -4,6 +4,12 @@
 
 ```shell
 psql -f sql/up.sql -t -o assets/up.json service=mercantour
+psql -f sql/prairie.sql -t -o assets/prairie.json service=mercantour
+psql -f sql/vallee.sql -t -o assets/vallee.json service=mercantour
+psql -f sql/exploitant.sql -t -o assets/exploitant.json service=mercantour
+psql -f sql/gex.sql -t -o assets/gex.json service=mercantour
+psql -f sql/convention_paturage.sql -t -o assets/convention_paturage.json service=mercantour
+psql -f sql/join_conv_up.sql -t -o assets/join_conv_up.json service=mercantour
 ```
 
 construit le fichier geojson des unités pastorales.

@@ -1,5 +1,7 @@
 import dash_leaflet as dl
 from dash import Output, Input
+import dash_bootstrap_components as dbc
+
 
 from config import app, ns, PNM_bounds
 from data import up_data, prairie_data
@@ -19,8 +21,8 @@ prairie = dl.GeoJSON(
     }
 )
 
-vallees = dl.GeoJSON(
-    url=app.get_asset_url('vallees.json'),
+vallee = dl.GeoJSON(
+    url=app.get_asset_url('vallee.json'),
 )
 
 planIGN = dl.TileLayer(
@@ -39,20 +41,26 @@ planIGN = dl.TileLayer(
     attribution="IGN-F/Geoportail",
 )
 
-component = dl.Map(
+map = dl.Map(
     dl.LayersControl([
         dl.BaseLayer(planIGN, name='Plan IGN', checked=True),
         # dl.BaseLayer(tile.ign('ortho'), name='Orthophotos', checked=False),
-        dl.Overlay(vallees, name='Vallées', checked=False),
+        dl.Overlay(vallee, name='Vallées', checked=False),
         dl.Overlay(up, name='Unités pastorales', checked=True),
         dl.Overlay(prairie, name='Prairies', checked=True),
     ]),
-    style={'width': '100%', 'height': '60vh'},
+    style={'width': '100%', 'height': '80vh'},
     bounds=PNM_bounds,
 )
 
+component = dbc.Card([
+    dbc.CardBody([
+        map,
+    ]),
+])
+
 input = {
-    'click': Input(component, 'click_lat_lng'),
+    'click': Input(map, 'click_lat_lng'),
     'up_feature': Input(up, 'click_feature'),
     'prairie_feature': Input(prairie, 'click_feature'),
 }
@@ -78,7 +86,7 @@ def process(click, up_feature, prairie_feature):
 
 
 output = {
-    'bounds': Output(component, 'bounds'),
+    'bounds': Output(map, 'bounds'),
     'up_feature': Output(up, 'click_feature'),
     'prairie_feature': Output(prairie, 'click_feature'),
 }

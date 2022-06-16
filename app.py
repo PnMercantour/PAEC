@@ -1,7 +1,9 @@
 from dash import Dash, callback, callback_context, html, dcc, Input, State, Output
 from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
+import filter
 import selection
+import info
 import map
 from config import app
 
@@ -10,13 +12,17 @@ app.layout = dbc.Container([
     dbc.Row([
         dbc.Col([
             html.Img(src=app.get_asset_url(
-                'logo-structure.png'), width='100%'),
+                'logo-structure.png'), width='80%'),
+                html.H1("PAEC Mercantour"),
+                filter.component,
             selection.component,
         ], md=3),
         dbc.Col([
-            html.H1("PAEC Mercantour"),
             map.component,
-        ], md=9),
+        ], md=6),
+        dbc.Col([
+            info.component,
+        ], md=3),
     ]),
 ],
     fluid=True,
@@ -30,6 +36,7 @@ server = app.server
     output={
         'selection': selection.output,
         'map': map.output,
+        'info': info.output,
     },
     inputs={
         'sel_input': selection.input,
@@ -37,17 +44,15 @@ server = app.server
     }
 )
 def update(sel_input, map_input):
-    print('selection input', sel_input)
-    print('map input', map_input)
     changes = selection.process(**sel_input)
     if changes is None:
         changes = map.process(**map_input)
     if changes is None:
         changes = {'up': None, 'prairie': None}
-    print('changes', changes)
     return {
         'selection': selection.update(changes),
         'map': map.update(**changes),
+        'info': info.update(**changes)
     }
 
 
