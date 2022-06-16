@@ -18,7 +18,8 @@ app.layout = dbc.Container([
             map.component,
         ], md=9),
     ]),
-], fluid=True,
+],
+    fluid=True,
     className='dbc',
 )
 
