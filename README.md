@@ -1,5 +1,25 @@
 # PAEC Mercantour
 
+## Guide utilisateur
+
+Le bandeau sur la gauche de l'écran permet de consulter l'annuaire des exploitants et de sélectionner une prairie de fauche ou une unité pastorale.
+Le ou les exploitants affichés dans l'annuaire sont utilisés comme filtre pour la recherche des unités pastorales et prairies.
+
+### Annuaire des exploitants
+Chaque prairie est associée à un exploitant unique.
+
+Chaque unité pastorale est associée à 0 ou n conventions de pâturage, chacune d'entre elles étant associée à un exploitant unique.
+
+Chaque exploitant est associé à 0 ou 1 groupe d'exploitants.
+
+La sélection d'un exploitant dans l'annuaire agit comme un filtre, masquant les prairies et unités pastorales qui ne sont pas associées à cet exploitant. Si l'exploitant appartient à un groupe d'exploitants, ce groupe est automatiquement sélectionné. Les données de l'exploitant sélectionné (et de son groupe, le cas échéant) sont affichées dans la carte annuaire.
+
+la sélection d'un groupe d'exploitants dans l'annuaire a pour effet: 
+- d'afficher les données du groupe d'exploitants dans la carte annuaire, 
+- de masquer les exploitants qui n'appartiennent pas au groupe d'exploitants,
+- de sélectionner l'exploitant lorsque le groupe ne contient qu'un seul exploitant,
+- de masquer les prairies et unités pastorales qui ne sont pas associées à l'un des exploitants du groupe d'exploitants.
+
 ## Génération des fichiers geojson
 
 ```shell

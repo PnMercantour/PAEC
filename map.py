@@ -92,7 +92,9 @@ output = {
 }
 
 
-def update(up, prairie):
+def update(input, changes, update_filter):
+    up = changes.get('up')
+    prairie = changes.get('prairie')
     if up is not None:
         bounds = up_data[up]['bounds']
     elif prairie is not None:

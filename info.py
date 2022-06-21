@@ -18,7 +18,9 @@ output = {'info': Output(info_exploitant, 'children'),
           'info_conventions': Output(info_conventions, 'children'), }
 
 
-def update(up, prairie):
+def update(changes):
+    up = changes.get ('up', None)
+    prairie = changes.get('prairie', None)
     exploitant = None
     if prairie:
         exploitant = prairie_data[prairie]['exploitant']
