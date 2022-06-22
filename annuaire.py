@@ -1,20 +1,25 @@
 import dash_bootstrap_components as dbc
 from dash import Input, Output, callback, callback_context, html, no_update, dcc
 from dash.exceptions import PreventUpdate
-from data import gex_data, exploitant_data, exploitant_list
+from data import gex_data, gex_list, exploitant_data, exploitant_list
+
+
+def exploitant_id_to_options(ids):
+    "<ids>: liste d'identifiants d'exploitant ou None (pas de filtre)"
+    exploitants = [exploitant_data[id]
+                   for id in ids] if ids is not None else exploitant_list
+    return [{'label': exploitant['nom_complet'], 'value': exploitant['id']}
+            for exploitant in exploitants]
 
 
 def exploitant_options(gex_id):
-    print('gex_id', gex_id)
-    exp_list = [exploitant_data[exploitant_id] for exploitant_id in gex_data[gex_id]['exploitants']] if gex_id is not None else exploitant_list
-    print('exp list',exp_list[0] if len(exp_list) > 0 else None)
-    return [{'label': exploitant['nom_complet'], 'value': exploitant['id']}
-            for exploitant in exp_list]
+    "gex_id ou None (pas de filtre)"
+    return exploitant_id_to_options(gex_data[gex_id]['exploitants']if gex_id is not None else None)
 
 
 gex_dropdown = dcc.Dropdown(
     options=[{'label': gex['nom_complet'], 'value': gex['id']}
-             for gex in sorted(gex_data.values(), key=lambda item:item['nom_complet'])],
+             for gex in gex_list],
     placeholder="Groupe d'exploitants",
 )
 
@@ -34,20 +39,22 @@ component = dbc.Card([
 
 
 input = {
-    'gex_id': Input(gex_dropdown, 'value'),
-    'exploitant_id': Input(exploitant_dropdown, 'value'),
+    'gex': Input(gex_dropdown, 'value'),
+    'exploitant': Input(exploitant_dropdown, 'value'),
 }
 
 
-def process(gex_id, exploitant_id):
+def process(input):
+    gex_id = input['gex']
+    exploitant_id = input['exploitant']
     triggers = [trigger['prop_id'] for trigger in callback_context.triggered]
     if any([gex_dropdown.id in trigger for trigger in triggers]):
         options = exploitant_options(gex_id)
         return{
-                'gex': gex_id,
-                'exploitant': options[0]['value'] if len(options) == 1 else None,
-                'exploitant_list': options,
-            }
+            'gex': gex_id,
+            'exploitant': options[0]['value'] if len(options) == 1 else None,
+            'exploitant_list': options,
+        }
     if any([exploitant_dropdown.id in trigger for trigger in triggers]):
         if exploitant_id:
             new_gex_id = exploitant_data[exploitant_id]['gex']

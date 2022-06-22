@@ -3,16 +3,22 @@ from dash import Input, Output, callback, callback_context, html, no_update, dcc
 from data import up_data, prairie_data, up_list, prairie_list, exploitant_data, gex_data
 import annuaire
 
-def up_id_to_options(ids):
-    return [{'label': f"{id} - {up_data[id]['nom']}", 'value': id}
-                   for id in ids]
-
 up_base_options = [{'label': f"{up['id']} - {up['nom']}", 'value': up['id']}
                    for up in up_list]
 
+
+def up_id_to_options(ids):
+    return [{'label': f"{id} - {up_data[id]['nom']}", 'value': id}
+            for id in ids] if ids is not None else up_base_options
+
+
+prairie_base_options = [{'label': f"{prairie['id']}", 'value': prairie['id']}
+                        for prairie in sorted(prairie_data.values(), key=lambda item:item['id'])]
+
+
 def prairie_id_to_options(ids):
     return [{'label': id, 'value': id}
-                   for id in ids]
+            for id in ids] if ids is not None else prairie_base_options
 
 # def up_options(context):
 #     if context.get('exploitant') is not None:
@@ -42,8 +48,6 @@ def prairie_id_to_options(ids):
 up_dropdown = dcc.Dropdown(options=up_base_options,
                            placeholder="Unité pastorale")
 
-prairie_base_options = [{'label': f"{prairie['id']}", 'value': prairie['id']}
-                        for prairie in sorted(prairie_data.values(), key=lambda item:item['id'])]
 prairie_dropdown = dcc.Dropdown(
     options=prairie_base_options, placeholder="Prairie")
 
@@ -73,7 +77,9 @@ input = {
 }
 
 
-def process(up, prairie):
+def process(input):
+    up = input['up']
+    prairie = input['prairie']
     triggers = [trigger['prop_id'] for trigger in callback_context.triggered]
     if any([up_dropdown.id in trigger for trigger in triggers]):
         return {
@@ -85,6 +91,7 @@ def process(up, prairie):
             'up': None,
             'prairie': prairie,
         }
+    return None
 
 
 output = {
@@ -97,6 +104,7 @@ output = {
 
 def update(input, changes, update_filter):
     print('changes', changes)
+    print('filter', update_filter)
     return {
         'up':  changes.get('up', no_update),
         'prairie': changes.get('prairie', no_update),

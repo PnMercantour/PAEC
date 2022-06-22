@@ -55,6 +55,8 @@ def up_par_exploitant(exploitant):
 up_list = sorted(up_data.values(), key=lambda item: item['id'])
 prairie_list = sorted(prairie_data.values(), key=lambda item: item['id'])
 
+gex_list = sorted(gex_data.values(), key=lambda item: item['nom_complet'])
+
 exploitant_list = sorted(exploitant_data.values(),
                          key=lambda item: item['nom_complet'])
 
@@ -98,19 +100,19 @@ for gex in gex_data.values():
     gex_cache(gex)
 
 
-def up_id_list(context):
+def up_id_filter_list(context):
     if context.get('exploitant') is not None:
         return exploitant_data[context['exploitant']]['ups']
     elif context.get('gex') is not None:
         return gex_data[context['gex']]['ups']
     else:
-        return [up['id'] for up in up_list]
+        return None
 
 
-def prairie_id_list(context):
+def prairie_id_filter_list(context):
     if context.get('exploitant') is not None:
         return exploitant_data[context['exploitant']]['prairies']
     elif context.get('gex') is not None:
         return gex_data[context['gex']]['prairies']
     else:
-        return [prairie['id'] for prairie in prairie_list]
+        return None

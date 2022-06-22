@@ -6,7 +6,7 @@ import selection
 import info
 import map
 from config import app
-from data import up_id_list, prairie_id_list
+from data import up_id_filter_list, prairie_id_filter_list
 
 
 app.layout = dbc.Container([
@@ -47,18 +47,34 @@ server = app.server
     }
 )
 def update(annuaire_input, sel_input, map_input):
-    changes = annuaire.process(**annuaire_input)
+    changes = annuaire.process(annuaire_input)
     update_filter = changes is not None
     if update_filter:
-        up_ids = up_id_list(changes)
-        prairie_ids = prairie_id_list(changes)
+        up_ids = up_id_filter_list(changes)
         changes['up_ids'] = up_ids
+        if up_ids is None:
+            changes['up'] = sel_input['up']
+        elif len(up_ids) == 1:
+            changes['up'] = up_ids[0]
+        elif sel_input['up'] in up_ids:
+            changes['up'] = sel_input['up']
+        else:
+            changes['up'] = None
+        prairie_ids = prairie_id_filter_list(changes)
         changes['prairie_ids'] = prairie_ids
-        changes['up'] = up_ids[0] if len(up_ids) == 1 else sel_input['up'] if sel_input['up'] is not None and sel_input['up'] in up_ids else None
-        changes['prairie'] = prairie_ids[0] if len(prairie_ids) == 1 else sel_input['prairie'] if sel_input['prairie'] is not None and sel_input['prairie'] in prairie_ids else None
+        if prairie_ids is None:
+            changes['prairie'] = sel_input['prairie']
+        elif len(prairie_ids) == 1:
+            changes['prairie'] = prairie_ids[0]
+        elif sel_input['prairie'] in prairie_ids:
+            changes['prairie'] = sel_input['prairie']
+        else:
+            changes['prairie'] = None
 
     if changes is None:
-        changes = selection.process(**sel_input)
+        changes = selection.process(sel_input)
+        print('selection changes', changes, annuaire_input)
+        print('le filtre', up_id_filter_list(annuaire_input))
     if changes is None:
         changes = map.process(**map_input)
     if changes is None:
@@ -66,7 +82,11 @@ def update(annuaire_input, sel_input, map_input):
     return {
         'annuaire': annuaire.update(annuaire_input, changes),
         'selection': selection.update(sel_input, changes, update_filter),
-        'map': map.update(map_input, changes, update_filter),
+        'map': map.update(
+            map_input,
+            changes,
+            changes.get('up_ids', up_id_filter_list(annuaire_input)),
+            changes.get('prairie_ids', prairie_id_filter_list(annuaire_input))),
         'info': info.update(changes)
     }
 

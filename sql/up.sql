@@ -5,37 +5,71 @@
 -- geometry: multipolygone
 -- bbox : la boîte englobante.
 -- https://datatracker.ietf.org/doc/html/rfc7946
-WITH ev AS (
-  SELECT
-    id,
+with ev as (
+  select id,
     nom,
+    round(st_area(geom)) surface,
     st_transform (geom, 4326) geom,
     box2d (st_transform (geom, 4326)) envelope
-  FROM
-    ag_pasto.c_unite_pastorale_unp
+  from ag_pasto.c_unite_pastorale_unp
 ),
-up AS (
-  SELECT
-    id,
+up as (
+  select id,
     nom,
+    surface,
     geom,
     st_xmin (envelope),
     st_xmax (envelope),
     st_ymin (envelope),
     st_ymax (envelope)
-  FROM
-    ev
+  from ev
 ),
-features AS (
-  SELECT
-    json_build_object('type', 'Feature', 'properties',
-      json_build_object('id', id, 'nom', nom), 'geometry', st_asgeojson
-      (geom, 6)::json, 'bbox', json_build_array(st_xmin, st_ymin, st_xmax, st_ymax))
-      feature
-  FROM
-    up
+j as (
+  select up.id id,
+    json_build_object(
+      'id',
+      cp.id,
+      'intersect',
+      round(st_area (st_intersection (cp.geom, up.geom)))
+    ) cp
+  from ag_pasto.c_convention_paturage_cpa cp
+    join ag_pasto.c_unite_pastorale_unp up on (st_intersects (cp.geom, up.geom))
+),
+j1 as(
+  select id,
+    round(st_area(up.geom)) surface,
+    array_to_json(array_agg(cp)) cp
+  from ag_pasto.c_unite_pastorale_unp up
+    left join j using(id)
+  group by id
+),
+features as (
+  select json_build_object(
+      'type',
+      'Feature',
+      'properties',
+      json_build_object(
+        'id',
+        id,
+        'nom',
+        nom,
+        'surface',
+        up.surface,
+        'cp',
+        cp
+      ),
+      'geometry',
+      st_asgeojson (geom, 6)::json,
+      'bbox',
+      json_build_array(st_xmin, st_ymin, st_xmax, st_ymax)
+    ) feature
+  from up
+    join j1 using (id)
 )
-SELECT
-  json_build_object('type', 'FeatureCollection', 'features', json_agg(feature))::text geojson
-FROM
-  features;
+select json_build_object(
+    'type',
+    'FeatureCollection',
+    'features',
+    json_agg(feature)
+  )::text geojson
+from features;
