@@ -2,6 +2,9 @@
 -- properties:
 --      id (entier)
 --      nom (chaîne UTF8)
+--      surface (entier, unité m2)
+--      cp (liste d'objets) liste des conventions de pâturage [{id, intersect}*] (ou [null])
+--      https://stackoverflow.com/questions/33304983/how-to-create-an-empty-json-object-in-postgresql
 -- geometry: multipolygone
 -- bbox : la boîte englobante.
 -- https://datatracker.ietf.org/doc/html/rfc7946
