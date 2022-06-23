@@ -18,6 +18,7 @@ window.PNM = Object.assign({}, window.PNM, {
       'Report de pâturage et maintien d\'ouverture',
       'Maintien de la pratique de la fauche'
     ],
+    catalogue_mesures_fauche: [],
     upTooltip: (feature, layer) => {
       layer.bindTooltip(`unité pastorale<small> #${feature.properties.id}</small><hr><strong>${
         feature.properties.nom
@@ -35,6 +36,16 @@ ${Math.round(feature.properties.surface / 1000) / 10} ha
 <br><strong>${PNM.PAEC.catalogue_mesures[feature.properties.type_mesure]}</strong>
 <hr>
 ${feature.properties.mesure}
+<br> <small> ${feature.properties.commentaire}</small>
+<br>${Math.round(feature.properties.surface / 1000) / 10} ha
+
+`);
+    },
+    faucheTooltip: (feature, layer) => {
+      layer.bindTooltip(`mesure de fauche<small> #${feature.properties.id}</small>
+<br><strong>${PNM.PAEC.catalogue_mesures_fauche[feature.properties.engagement]}</strong>
+<hr>
+${feature.properties.debut} - ${feature.properties.fin}
 <br> <small> ${feature.properties.commentaire}</small>
 <br>${Math.round(feature.properties.surface / 1000) / 10} ha
 
@@ -90,6 +101,18 @@ ${feature.properties.mesure}
       }
       return {
         color: "purple",
+        fillOpacity: 0.4,
+      };
+    },
+    faucheStyle: (feature, context) => {
+      if (context.props.hideout.selected == feature.properties.id) {
+        return {
+          color: "orange",
+          fillOpacity: 0.4,
+        };
+      }
+      return {
+        color: "blue",
         fillOpacity: 0.4,
       };
     },

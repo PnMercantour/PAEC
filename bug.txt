@@ -1,0 +1,12 @@
+select * from ag_pasto.c_mesure_pres_fauche_mep mesure join ag_pasto.c_prairie_pra prairie on (prairie = prairie.id)
+where not st_intersects(mesure.geom, prairie.geom)
+-->
+la prairie 473 n'a pas d'intersection avec la mesure de fauche 181.
+C'est la prairie 573.
+
+select * from ag_pasto.c_mesure_pres_fauche_mep mesure join ag_pasto.c_prairie_pra prairie on  st_intersects(mesure.geom, prairie.geom)
+where prairie.id = 473
+-->
+3 mesures intersectent la prairie.  Une seule est associée à cette prairie, une autre est associée à la prairie 1088, la dernière n'est associée à aucune prairie.
+
+Considérer que l'attribut prairie de la table ag_pasto.c_mesure_pres_fauche_mep n'est pas fiable.

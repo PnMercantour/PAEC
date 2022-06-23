@@ -40,6 +40,17 @@ mesure_gestion = dl.GeoJSON(
     }
 )
 
+mesure_fauche = dl.GeoJSON(
+    url=app.get_asset_url('mesure_fauche.json'),
+    hideout={'selected': None, 'filtered': None},
+    options={
+        'pane': 'my_front_pane',
+        'style': ns('faucheStyle'),
+        # 'filter': ns('areaFilter'),
+        'onEachFeature': ns('faucheTooltip')
+    }
+)
+
 vallee = dl.GeoJSON(
     url=app.get_asset_url('vallee.json'),
 )
@@ -67,6 +78,7 @@ contents = dl.LayersControl([
     dl.Overlay(up, name='Unités pastorales', checked=True),
     dl.Overlay(prairie, name='Prairies', checked=True),
     dl.Overlay(mesure_gestion, name='Mesures de gestion pastorale', checked=True),
+    dl.Overlay(mesure_fauche, name='Mesures prés de fauche', checked=True),
 ])
 map = dl.Map(dl.Pane(dl.Pane(dl.Pane(
     contents,
