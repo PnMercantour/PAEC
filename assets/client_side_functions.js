@@ -1,17 +1,43 @@
 window.PNM = Object.assign({}, window.PNM, {
   PAEC: {
+    catalogue_mesures: [
+      0,
+      'Respect des défens',
+      'Report de pâturage',,
+      'Préservation des zones humides',,,,
+      'Pâturage renforcé',,,,
+      'Maintien d\'ouverture',
+      'Ouverture',
+      'Pâturage',
+      'Raclage maximum 4',
+      'Raclage maximum 2',,,,,,,
+      'Limitation de passage et de pâturage',
+      'Raclage maximum 3',,,,,
+      'Protection des pelouses fragiles',,,
+      'Report de pâturage et ouverture',
+      'Report de pâturage et maintien d\'ouverture',
+      'Maintien de la pratique de la fauche'
+    ],
     upTooltip: (feature, layer) => {
-      layer.bindTooltip(`unité pastorale<hr><strong>${
+      layer.bindTooltip(`unité pastorale<small> #${feature.properties.id}</small><hr><strong>${
         feature.properties.nom
       }</strong>
 <br>${Math.round(feature.properties.surface / 10000)} ha
-<br><small>Id #${feature.properties.id}</small>
 `);
     },
     prairieTooltip: (feature, layer) => {
-      layer.bindTooltip(`prairie<hr>
+      layer.bindTooltip(`prairie<small> #${feature.properties.id}</small><hr>
 ${Math.round(feature.properties.surface / 1000) / 10} ha
-<br><small>Id #${feature.properties.id}</small>
+`);
+    },
+    gestionTooltip: (feature, layer) => {
+      layer.bindTooltip(`mesure de gestion<small> #${feature.properties.id} (MAEC #${feature.properties.maec})</small>
+<br><strong>${PNM.PAEC.catalogue_mesures[feature.properties.type_mesure]}</strong>
+<hr>
+${feature.properties.mesure}
+<br> <small> ${feature.properties.commentaire}</small>
+<br>${Math.round(feature.properties.surface / 1000) / 10} ha
+
 `);
     },
     areaFilter: (feature, context) => {
@@ -52,6 +78,18 @@ ${Math.round(feature.properties.surface / 1000) / 10} ha
       }
       return {
         color: "brown",
+        fillOpacity: 0.4,
+      };
+    },
+    gestionStyle: (feature, context) => {
+      if (context.props.hideout.selected == feature.properties.id) {
+        return {
+          color: "orange",
+          fillOpacity: 0.4,
+        };
+      }
+      return {
+        color: "purple",
         fillOpacity: 0.4,
       };
     },

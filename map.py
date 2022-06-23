@@ -11,6 +11,7 @@ up = dl.GeoJSON(
     url=app.get_asset_url('up.json'),
     hideout={'selected': None, 'filtered': None},
     options={
+        'pane': 'my_common_pane',
         'style': ns('upStyle'),
         'filter': ns('areaFilter'),
         'onEachFeature': ns('upTooltip')
@@ -21,9 +22,21 @@ prairie = dl.GeoJSON(
     url=app.get_asset_url('prairie.json'),
     hideout={'selected': None, 'filtered': None},
     options={
+        'pane': 'my_common_pane',
         'style': ns('prairieStyle'),
         'filter': ns('areaFilter'),
         'onEachFeature': ns('prairieTooltip')
+    }
+)
+
+mesure_gestion = dl.GeoJSON(
+    url=app.get_asset_url('mesure_gestion.json'),
+    hideout={'selected': None, 'filtered': None},
+    options={
+        'pane': 'my_front_pane',
+        'style': ns('gestionStyle'),
+        # 'filter': ns('areaFilter'),
+        'onEachFeature': ns('gestionTooltip')
     }
 )
 
@@ -47,14 +60,25 @@ planIGN = dl.TileLayer(
     attribution="IGN-F/Geoportail",
 )
 
-map = dl.Map(
-    dl.LayersControl([
-        dl.BaseLayer(planIGN, name='Plan IGN', checked=True),
-        # dl.BaseLayer(tile.ign('ortho'), name='Orthophotos', checked=False),
-        dl.Overlay(vallee, name='Vallées', checked=False),
-        dl.Overlay(up, name='Unités pastorales', checked=True),
-        dl.Overlay(prairie, name='Prairies', checked=True),
-    ]),
+contents = dl.LayersControl([
+    dl.BaseLayer(planIGN, name='Plan IGN', checked=True),
+    # dl.BaseLayer(tile.ign('ortho'), name='Orthophotos', checked=False),
+    dl.Overlay(vallee, name='Vallées', checked=False),
+    dl.Overlay(up, name='Unités pastorales', checked=True),
+    dl.Overlay(prairie, name='Prairies', checked=True),
+    dl.Overlay(mesure_gestion, name='Mesures de gestion pastorale', checked=True),
+])
+map = dl.Map(dl.Pane(dl.Pane(dl.Pane(
+    contents,
+    name='my_selection_pane',
+    style={'zIndex': 600},
+),
+    name='my_front_pane',
+    style={'zIndex': 460},
+),
+    name='my_common_pane',
+    style={'zIndex': 450},
+),
     style={'width': '100%', 'height': '80vh'},
     bounds=PNM_bounds,
 )
