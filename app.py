@@ -51,30 +51,31 @@ def update(annuaire_input, sel_input, map_input):
     update_filter = changes is not None
     if update_filter:
         up_ids = up_id_filter_list(changes)
+        prairie_ids = prairie_id_filter_list(changes)
         changes['up_ids'] = up_ids
+        changes['prairie_ids'] = prairie_ids
         if up_ids is None:
+            # assume prairie_ids is None, too
             changes['up'] = sel_input['up']
-        elif len(up_ids) == 1:
-            changes['up'] = up_ids[0]
+            changes['prairie'] = sel_input['prairie']
         elif sel_input['up'] in up_ids:
             changes['up'] = sel_input['up']
+            changes['prairie'] = None
+        elif sel_input['prairie'] in prairie_ids:
+            changes['up'] = None
+            changes['prairie'] = sel_input['prairie']
+        elif len(up_ids) == 1:
+            changes['up'] = up_ids[0]
+            changes['prairie'] = None
+        elif len(prairie_ids) == 1:
+            changes['up'] = None
+            changes['prairie'] = prairie_ids[0]
         else:
             changes['up'] = None
-        prairie_ids = prairie_id_filter_list(changes)
-        changes['prairie_ids'] = prairie_ids
-        if prairie_ids is None:
-            changes['prairie'] = sel_input['prairie']
-        elif len(prairie_ids) == 1:
-            changes['prairie'] = prairie_ids[0]
-        elif sel_input['prairie'] in prairie_ids:
-            changes['prairie'] = sel_input['prairie']
-        else:
             changes['prairie'] = None
 
     if changes is None:
         changes = selection.process(sel_input)
-        print('selection changes', changes, annuaire_input)
-        print('le filtre', up_id_filter_list(annuaire_input))
     if changes is None:
         changes = map.process(**map_input)
     if changes is None:

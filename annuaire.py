@@ -28,12 +28,16 @@ exploitant_dropdown = dcc.Dropdown(
     placeholder="Exploitant",
 )
 
+gex_adresse = html.Div('Adresse gex')
 
+exploitant_adresse = html.Div('Adresse exploitant')
 component = dbc.Card([
     dbc.CardHeader("Annuaire des exploitants"),
     dbc.CardBody([
         gex_dropdown,
+        gex_adresse,
         exploitant_dropdown,
+        exploitant_adresse,
     ]),
 ])
 
@@ -76,14 +80,20 @@ def process(input):
 
 output = {
     'gex': Output(gex_dropdown, 'value'),
+    'gex_adresse': Output(gex_adresse, 'children'),
     'exploitant': Output(exploitant_dropdown, 'value'),
+    'exploitant_adresse': Output(exploitant_adresse, 'children'),
     'exploitant_list': Output(exploitant_dropdown, 'options'),
 }
 
 
 def update(input, changes):
+    gex_id = changes.get('gex', input.get('gex'))
+    exploitant_id = changes.get('exploitant', input.get('exploitant'))
     return {
         'gex': changes.get('gex', no_update),
+        'gex_adresse': gex_data[gex_id]['adresse'] if gex_id is not None else None,
         'exploitant': changes.get('exploitant', no_update),
+        'exploitant_adresse': exploitant_data[exploitant_id]['adresse'] if exploitant_id is not None else None,
         'exploitant_list': changes.get('exploitant_list', no_update),
     }
