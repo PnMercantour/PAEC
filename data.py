@@ -45,6 +45,9 @@ with (assets_path/'mesure_gestion.json').open('r') as f:
 with (assets_path/'cat_mesure_gestion.json').open('r') as f:
     cat_mesure_gestion = {i['id']: i['label'] for i in json.load(f)}
 
+with (assets_path/'cat_engagement.json').open('r') as f:
+    cat_engagement = {i['id']: i['label'] for i in json.load(f)}
+
 with (assets_path/'mesure_fauche.json').open('r') as f:
     mesure_fauche_data = to_dict(
         dict(mesure_fauche['properties']) for mesure_fauche in json.load(f)['features']

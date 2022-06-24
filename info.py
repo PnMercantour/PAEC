@@ -1,23 +1,19 @@
 import dash_bootstrap_components as dbc
 from dash import Input, Output, callback, callback_context, html, no_update, dcc
-from data import gex_data, exploitant_data, prairie_data, conv_up, up_data, mesure_gestion_data, mesure_fauche_data, cat_mesure_gestion, convention_paturage_data
+from data import gex_data, exploitant_data, prairie_data, conv_up, up_data, mesure_gestion_data, mesure_fauche_data, cat_mesure_gestion, convention_paturage_data, cat_engagement
 
 title = html.Div()
 
 body = dbc.CardBody()
 
-raw = html.Div()
-
 component = dbc.Card([
     dbc.CardHeader(title),
     body,
-    dbc.CardBody(raw),
 ])
 
 output = {
     'title': Output(title, 'children'),
     'body': Output(body, 'children'),
-    'raw': Output(raw, 'children'),
 }
 
 
@@ -50,7 +46,23 @@ def display_mesures_gestion(mesures):
 
 
 def display_exploitants(parcelles):
-    return html.Div([exploitant_data[parcelle['exploitant']]['nom_complet'] for parcelle in parcelles])
+    return html.Div([exploitant_data[parcelle['exploitant']]['nom_complet'] for parcelle in parcelles if parcelle['exploitant'] is not None])
+
+
+def display_mesure_fauche(mesure):
+    return html.Div([
+        html.Hr(),
+        html.Div(
+            f"mesure de gestion #{mesure['id']}"),
+        html.Div(html.Strong(f"{cat_engagement[mesure['engagement']]}")),
+        html.Div(
+            f"{mesure['commentaire'] if mesure['commentaire'] is not None else ''}"),
+        html.Div(f"{round(mesure['surface']/10000)} ha"),
+    ])
+
+
+def display_mesures_fauche(mesures):
+    return html.Div([display_mesure_fauche(mesure) for mesure in mesures])
 
 
 def update(input, changes):
@@ -66,13 +78,14 @@ def update(input, changes):
                          f" #{up['id']}"]),
                 html.Div(f"{round(up['surface']/10000)} ha"),
                 display_exploitants(conventions),
+                html.Hr(),
                 html.Div(
                     f"{len(mesures)} mesure(s) de gestion") if len(mesures) > 0 else "pas de mesure de gestion",
                 display_mesures_gestion(mesures),
-                html.Div(f"{environ - len(mesures)} mesure(s) de gestion à proximité") if environ > len(
+                html.Hr(),
+                html.Div(f"{environ - len(mesures)} mesure(s) de gestion contigue (intersection non vide)") if environ > len(
                     mesures) else None,
             ],
-            'raw': None,
         }
     prairie_id = changes.get('prairie', input['prairie'])
     if prairie_id is not None:
@@ -82,15 +95,17 @@ def update(input, changes):
             'title': 'Prairie',
             'body': [
                 html.Div(f"{round(prairie['surface']/1000)/10} ha"),
+                display_exploitants([prairie]),
+                html.Hr(),
                 html.Div(
                     f"{len(mesures)} mesure(s) de gestion") if len(mesures) > 0 else "pas de mesure de gestion",
-                html.Div(f"{environ - len(mesures)} mesure(s) de gestion à proximité") if environ > len(
+                display_mesures_fauche(mesures),
+                html.Hr(),
+                html.Div(f"{environ - len(mesures)} mesure(s) de gestion contigue (intersection non vide)") if environ > len(
                     mesures) else None,
             ],
-            'raw': f'{prairie}',
         }
     return {
         'title': 'pas de sélection',
         'body': None,
-        'raw': None,
     }
