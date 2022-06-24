@@ -5,7 +5,16 @@
 Le bandeau sur la gauche de l'écran permet de consulter l'annuaire des exploitants et de sélectionner une prairie de fauche ou une unité pastorale.
 Le ou les exploitants affichés dans l'annuaire sont utilisés comme filtre pour la recherche des unités pastorales et prairies.
 
+La carte permet de visualiser les unités pastorales, les prairies, mais aussi les mesures de gestion, les conventions de pâturage et les vallées (en sélectionnant ces couches dans le sélecteur en haut à droite).
+
+L'indication de la nature et des attributs des objets apparaît en les survolant.
+
+Les unités pastorales et les prairies peuvent être sélectionnées (sélection synchronisée avec le menu de recherche).
+
+Le bandeau de droite donne des informations détaillées sur l'objet sélectionné.
+
 ### Annuaire des exploitants
+
 Chaque prairie est associée à un exploitant unique.
 
 Chaque unité pastorale est associée à 0 ou n conventions de pâturage, chacune d'entre elles étant associée à un exploitant unique.
@@ -14,33 +23,63 @@ Chaque exploitant est associé à 0 ou 1 groupe d'exploitants.
 
 La sélection d'un exploitant dans l'annuaire agit comme un filtre, masquant les prairies et unités pastorales qui ne sont pas associées à cet exploitant. Si l'exploitant appartient à un groupe d'exploitants, ce groupe est automatiquement sélectionné. Les données de l'exploitant sélectionné (et de son groupe, le cas échéant) sont affichées dans la carte annuaire.
 
-la sélection d'un groupe d'exploitants dans l'annuaire a pour effet: 
-- d'afficher les données du groupe d'exploitants dans la carte annuaire, 
+la sélection d'un groupe d'exploitants dans l'annuaire a pour effet:
+
+- d'afficher les données du groupe d'exploitants dans la carte annuaire,
 - de masquer les exploitants qui n'appartiennent pas au groupe d'exploitants,
 - de sélectionner l'exploitant lorsque le groupe ne contient qu'un seul exploitant,
 - de masquer les prairies et unités pastorales qui ne sont pas associées à l'un des exploitants du groupe d'exploitants.
 
+La désélection d'un groupe d'exploitants a pour effet d'annuler le filtrage (l'unité ou la prairie reste sélectionnée)
+
+La désélection d'un exploitant a pour effet de filtrer sur le groupe auquel il appartient.
+
+L'emprise de la carte est automatiquement mise à jour lorsque le filtre change de valeur.
+
+### Rechercher
+
+Cette section permet de rechercher une unité pastorale ou une prairie par son nom ou son identifiant. On peut soit taper une partie du nom ou de l'identifiant, soit utiliser le menu déroulant.
+
+La sélection d'une unité pastorale ou d'une prairie entraîne le zoom sur la carte et l'affichage de détails dans le bandeau de droite.
+
+Un seul objet peut être sélectionné (unité pastorale OU prairie)
+
+### Carte
+
+Les couches unités pastorales et prairies sont affichées par défaut. Un code couleur distingue les surfaces engagées de celles qui ne le sont pas.
+
+Sélectionner en cliquant sur une unité pastorale ou une prairie. Désélectionner en cliquant à l'extérieur de l'objet.
+
+Zoom automatique de la carte sur la sélection (ou sur l'emprise des unités pastorales et prairies d'un exploitant ou d'un groupe d'exploitants).
+
+Les couches mesures de gestion (UP et prairies), conventions de pâturage et vallées sont désélectionnées par défaut.
+
+Affichage du résumé de l'objet survolé.
+
+Lorsque l'objet recherché est masqué par un objet appartenant à une autre couche, il suffit de désélectionner la couche qui fait obstacle.
+
+## Bandeau d'information
+
+Le bandeau en partie droite donne des détails sur l'unité pastorale ou la prairie sélectionnée.
+
+- nom
+- surface
+- exploitants liés à la parcelle
+- mesures de gestion portant sur la parcelle
+
 ## Génération des fichiers geojson
 
 ```shell
-psql -f sql/up.sql -t -o assets/up.json service=mercantour
-psql -f sql/prairie.sql -t -o assets/prairie.json service=mercantour
-psql -f sql/vallee.sql -t -o assets/vallee.json service=mercantour
-psql -f sql/exploitant.sql -t -o assets/exploitant.json service=mercantour
-psql -f sql/gex.sql -t -o assets/gex.json service=mercantour
-psql -f sql/convention_paturage.sql -t -o assets/convention_paturage.json service=mercantour
-psql -f sql/join_conv_up.sql -t -o assets/join_conv_up.json service=mercantour
+bin/getdata
 ```
 
-construit le fichier geojson des unités pastorales.
+construit les fichiers (geo)json utilisés par l'application.
 
 ## Filtres
 
 Filtre regroupement d'exploitants
 
 Filtre Exploitant (la sélection d'un exploitant force le gex associé)
-
-Filtre Service territorial
 
 ## Déploiement
 
