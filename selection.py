@@ -103,8 +103,6 @@ output = {
 
 
 def update(input, changes, update_filter):
-    print('changes', changes)
-    print('filter', update_filter)
     return {
         'up':  changes.get('up', no_update),
         'prairie': changes.get('prairie', no_update),

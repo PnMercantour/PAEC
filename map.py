@@ -11,7 +11,6 @@ up = dl.GeoJSON(
     url=app.get_asset_url('up.json'),
     hideout={'selected': None, 'filtered': None},
     options={
-        'pane': 'my_common_pane',
         'style': ns('upStyle'),
         'filter': ns('areaFilter'),
         'onEachFeature': ns('upTooltip')
@@ -22,7 +21,6 @@ prairie = dl.GeoJSON(
     url=app.get_asset_url('prairie.json'),
     hideout={'selected': None, 'filtered': None},
     options={
-        'pane': 'my_common_pane',
         'style': ns('prairieStyle'),
         'filter': ns('areaFilter'),
         'onEachFeature': ns('prairieTooltip')
@@ -33,7 +31,6 @@ mesure_gestion = dl.GeoJSON(
     url=app.get_asset_url('mesure_gestion.json'),
     hideout={'selected': None, 'filtered': None},
     options={
-        'pane': 'my_front_pane',
         'style': ns('gestionStyle'),
         # 'filter': ns('areaFilter'),
         'onEachFeature': ns('gestionTooltip')
@@ -44,10 +41,19 @@ mesure_fauche = dl.GeoJSON(
     url=app.get_asset_url('mesure_fauche.json'),
     hideout={'selected': None, 'filtered': None},
     options={
-        'pane': 'my_front_pane',
         'style': ns('faucheStyle'),
         # 'filter': ns('areaFilter'),
         'onEachFeature': ns('faucheTooltip')
+    }
+)
+
+convention_paturage = dl.GeoJSON(
+    url=app.get_asset_url('convention_paturage.json'),
+    hideout={'selected': None, 'filtered': None},
+    options={
+        'style': ns('cpStyle'),
+        # 'filter': ns('areaFilter'),
+        'onEachFeature': ns('cpTooltip')
     }
 )
 
@@ -77,8 +83,11 @@ contents = dl.LayersControl([
     dl.Overlay(vallee, name='Vallées', checked=False),
     dl.Overlay(up, name='Unités pastorales', checked=True),
     dl.Overlay(prairie, name='Prairies', checked=True),
-    dl.Overlay(mesure_gestion, name='Mesures de gestion pastorale', checked=True),
-    dl.Overlay(mesure_fauche, name='Mesures prés de fauche', checked=True),
+    dl.Overlay(mesure_gestion,
+               name='Mesures de gestion pastorale', checked=False),
+    dl.Overlay(mesure_fauche, name='Mesures prés de fauche', checked=False),
+    dl.Overlay(convention_paturage,
+               name='Conventions de pâturage', checked=False),
 ])
 map = dl.Map(dl.Pane(dl.Pane(dl.Pane(
     contents,
@@ -137,7 +146,6 @@ output = {
 
 
 def envelope(bl):
-    print(bl)
     [[a, b], [c, d]] = bl[0]
     for [[m, n], [o, p]] in bl:
         a = min(a, m)
@@ -150,7 +158,6 @@ def envelope(bl):
 def update(input, changes, up_filter, prairie_filter):
     up = changes.get('up')
     prairie = changes.get('prairie')
-    print('UPDATE', up, prairie, up_filter, prairie_filter)
     if up is not None:
         bounds = up_data[up]['bounds']
     elif prairie is not None:

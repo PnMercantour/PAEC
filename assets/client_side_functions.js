@@ -80,6 +80,15 @@ ${feature.properties.debut} - ${feature.properties.fin}
 
 `);
     },
+    cpTooltip: (feature, layer) => {
+      layer.bindTooltip(`convention de pâturage<small> #${
+        feature.properties.id
+      }</small>
+<hr>
+${feature.properties.debut} - ${feature.properties.fin}
+<br>${Math.round(feature.properties.surface / 10000)} ha
+`);
+    },
     areaFilter: (feature, context) => {
       let hideout = context.props.hideout;
       let filter = hideout.filtered;
@@ -143,6 +152,18 @@ ${feature.properties.debut} - ${feature.properties.fin}
       return {
         color: "blue",
         fillOpacity: 0.4,
+      };
+    },
+    cpStyle: (feature, context) => {
+      if (context.props.hideout.selected == feature.properties.id) {
+        return {
+          color: "orange",
+          fillOpacity: 0.4,
+        };
+      }
+      return {
+        color: "black",
+        fillOpacity: 0.2,
       };
     },
   },

@@ -8,3 +8,4 @@ psql -f sql/convention_paturage.sql -t -o assets/convention_paturage.json servic
 psql -f sql/join_conv_up.sql -t -o assets/join_conv_up.json service=mercantour
 psql -f sql/mesure_gestion.sql -t -o assets/mesure_gestion.json service=mercantour
 psql -f sql/mesure_fauche.sql -t -o assets/mesure_fauche.json service=mercantour
+psql -f sql/cat_mesure_gestion.sql -t -o assets/cat_mesure_gestion.json service=mercantour

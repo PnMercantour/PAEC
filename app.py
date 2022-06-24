@@ -88,7 +88,7 @@ def update(annuaire_input, sel_input, map_input):
             changes,
             changes.get('up_ids', up_id_filter_list(annuaire_input)),
             changes.get('prairie_ids', prairie_id_filter_list(annuaire_input))),
-        'info': info.update(changes)
+        'info': info.update(sel_input, changes)
     }
 
 
