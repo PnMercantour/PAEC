@@ -4,3 +4,4 @@
 - générer une nouvelle couche prairie excluant celles du département 04, puisque la couche prairie fauche 04 propose des données plus à jour
 - l'ajout de l'attribut Secteur territorial pour les couches "Unités pastorales" + "MAEC pastorale" + "MAEC prairie" + "prairie fauche 04" + "prairie" 
 - couche MAEC prairie : générer une couche sans les MAEC sur parcelles hors AOA
+- carto MAEC lago idéale (JM)
