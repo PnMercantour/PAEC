@@ -1,7 +1,8 @@
 - les SHP d'ores et déjà intégrés au projet pour l'instant enregistré ici : "X:\3.1 AGRICULTURE\15_PAEC\PAEC_2023-2027\06_PROJET QGIS"
 - (selon retours AR) : observations espèces flores caractéristiques de certains habitats à enjeux : Pinus mugo + Eryngium alpinum + Genévrier thurifère (Juniperus thurifera)
 - (selon retours AR) : observations espèces flores à enjeu : Reine des Alpes + Fritillaire de Moggridge
-- générer une nouvelle couche prairie excluant celles du département 04, puisque la couche prairie fauche 04 propose des données plus à jour
+- générer une nouvelle couche prairie excluant celles du département 04, puisque la couche prairie fauche 04 propose des données plus à jour : X:\3.1 AGRICULTURE\3_PRES_DE_FAUCHE\Inventaire_CA04_2021
 - l'ajout de l'attribut Secteur territorial pour les couches "Unités pastorales" + "MAEC pastorale" + "MAEC prairie" + "prairie fauche 04" + "prairie" 
 - couche MAEC prairie : générer une couche sans les MAEC sur parcelles hors AOA
 - carto MAEC lago idéale (JM)
+- ZH
