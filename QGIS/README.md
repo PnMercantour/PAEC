@@ -3,7 +3,7 @@
 Le projet est hébergé sur le serveur postgresql accessible par le service `projets`.  
 Les tables sont enregistrées dans le schéma paec.
 
-Télécharger le [projet QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/QGIS/PAEC.sql) avec toutes les couches
+Télécharger le [projet QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/QGIS/PAEC.qgz) avec toutes les couches
 
 ## Prairies
 
