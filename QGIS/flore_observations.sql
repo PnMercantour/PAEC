@@ -10,6 +10,7 @@ SELECT
   nom_cite,
   cd_ref,
   nom_valide,
+  date_min,
   geom
 FROM
   gn_synthese.synthese_avec_partenaires sap
