@@ -11,11 +11,15 @@ Prairies du schéma ag_pasto avec mention du service territorial (id_st) compét
 
 Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/prairie.sql)
 
+Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/prairie.qlr)
+
 ## Unités pastorales
 
 Unités pastorales du schéma ag_pasto avec mention du service territorial (id_st) compétent.
 
 Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/up.sql)
+
+Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/up.qlr)
 
 ## Flore
 
