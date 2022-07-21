@@ -1,7 +1,11 @@
 # Accéder au projet PAEC avec QGIS ou en SQL
 
 Le projet est hébergé sur le serveur postgresql accessible par le service `projets`.  
-Les tables sont enregistrées dans le schéma paec.
+Les tables sont enregistrées dans le schéma paec. Des relations sont établies avec d'autres tables du même serveur :
+
+- schéma ag_pasto qui est une réplication récente du schéma encore en production sur le service `mercantour`
+
+- schéma gn_synthese qui est une réplication mise à jour quotidiennement de la base de données geonature.
 
 Télécharger le [projet QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/PAEC.qgz) avec toutes les couches
 
@@ -12,6 +16,11 @@ Prairies du schéma ag_pasto avec mention du service territorial (id_st) compét
 Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/prairie.sql)
 
 Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/prairie.qlr)
+
+Des données plus récentes relatives aux prairies des Alpes de Haute Provence sont également disponibles, avec les coordonnées des exploitants.  
+Il s'agit des tables paec.prairie_04 et paec.exploitant_04 (service `projets`).
+
+Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/prairie_exploitant_04.qlr)
 
 ## Unités pastorales
 
