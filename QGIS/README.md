@@ -20,7 +20,7 @@ Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PA
 Des données plus récentes relatives aux prairies des Alpes de Haute Provence sont également disponibles, avec les coordonnées des exploitants.  
 Il s'agit des tables paec.prairie_04 et paec.exploitant_04 (service `projets`).
 
-Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/prairie_exploitant_04.qlr)
+Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/prairie_exploitant_04.qlr). La relation entre les deux couches n'est pas correctement enregistrée dans le qlr, il faut restaurer les relations dans QGIS par le menu Projet/Propriétés/Relations/découvrir_les_relations .
 
 ## Unités pastorales
 
@@ -97,3 +97,15 @@ Fonctionnement identique à flore_prairie_detail.sql, appliqué aux unités past
 Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_up_detail.sql)
 
 Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_up_detail.qlr)
+
+## flore_prairie_04
+
+Idem flore_prairie (avant que l'on fusionne les deux tables)
+
+Télécharger la [requête sql flore_prairie_4.sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_prairie_4.sql)
+
+Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_prairie_04.qlr)
+
+Télécharger la [requête sql flore_prairie_04_detail.sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_prairie_04_detail.sql)
+
+Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_prairie_04_detail.qlr)
