@@ -4,7 +4,7 @@
 
 [Guide utilisateur QGIS ou SQL](QGIS/README.md)
 
-[Installation et exploitation de l'application web](installation-et-exploitation)
+[Installation et exploitation de l'application web](#installation-et-exploitation)
 
 ## Guide utilisateur
 
