@@ -32,6 +32,10 @@ Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PA
 
 ## Flore
 
+La liste des espèces à enjeu est enregistrée dans la table paec.enjeu_flore. Cette table peut être chargée dans QGIS (avec affichage du nom valide des espèces de la liste).
+
+Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_especes_a_enjeu.sql)
+
 ### Observations (geonature)
 
 Observations détaillées postérieures à 1990 d'espèces de la liste paec.enjeu_flore.
