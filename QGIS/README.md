@@ -50,11 +50,11 @@ ne conserve que les triplets (prairie, taxon, distance) dont la distance est inf
 
 pour ne conserver que les triplets pour lesquels le taxon a été observé sur l'emprise de la prairie.
 
-## [flore_up_vm.sql]()
+## [flore_up_vm.sql](flore_up_vm.sql)
 
 Vue matérialisée. Fonctionnement identique à flore_prairie_vm, appliqué aux unités pastorales.
 
-## [flore_prairie.sql]()
+## [flore_prairie.sql](flore_prairie.sql)
 
 Prairies pour lesquelles un taxon remarquable a été observé à proximité (moins de 200m) depuis 1990.  
 L'attribut taxons donne la liste des taxons observés, la proximité (en mètres) de chaque espèce est indiquée entre crochets.  
@@ -64,7 +64,7 @@ Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/P
 
 Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_prairie.qlr)
 
-## [flore_up.sql]()
+## [flore_up.sql](flore_up.sql)
 
 Fonctionnement identique à flore_prairie.sql, appliqué aux unités pastorales.
 
@@ -72,7 +72,7 @@ Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/P
 
 Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_up.qlr)
 
-## [flore_prairie_detail.sql]()
+## [flore_prairie_detail.sql](flore_prairie_detail.sql)
 
 Prairies (avec id, geom, id_st) et observations rattachées (proximite, cd_ref, nom_valide). Cette requête est conçue pour être filtrée sur l'un de ses attributs, elle retourne une ligne pour chaque couple (prairie, taxon)).  
 Le résultat de la requête flore_prairie.sql est plus synthétique (une ligne par prairie).
@@ -81,7 +81,7 @@ Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/P
 
 Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_prairie_detail.qlr)
 
-## [flore_up_detail.sql]()
+## [flore_up_detail.sql](flore_up_detail.sql)
 
 Fonctionnement identique à flore_prairie_detail.sql, appliqué aux unités pastorales.
 
