@@ -31,7 +31,7 @@ Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/P
 
 Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_observations.qlr)
 
-## [flore_prairie_vm.sql]()
+## [flore_prairie_vm.sql](flore_prairie_vm.sql)
 
 Vue matérialisée (opération coûteuse) précalculée donnant la matrice de proximité prairie / taxon lorsque le taxon a été vu depuis 1990 à moins de 200m de la prairie.
 
