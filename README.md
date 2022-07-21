@@ -1,5 +1,11 @@
 # PAEC Mercantour
 
+[Guide utilisateur de l'application web](#guide-utilisateur)
+
+[Guide utilisateur QGIS ou SQL](QGIS/README.md)
+
+[Installation et exploitation de l'application web](installation-et-exploitation)
+
 ## Guide utilisateur
 
 Le bandeau sur la gauche de l'écran permet de consulter l'annuaire des exploitants et de sélectionner une prairie de fauche ou une unité pastorale.
@@ -58,7 +64,7 @@ Affichage du résumé de l'objet survolé.
 
 Lorsque l'objet recherché est masqué par un objet appartenant à une autre couche, il suffit de désélectionner la couche qui fait obstacle.
 
-## Bandeau d'information
+### Bandeau d'information
 
 Le bandeau en partie droite donne des détails sur l'unité pastorale ou la prairie sélectionnée.
 
@@ -67,7 +73,9 @@ Le bandeau en partie droite donne des détails sur l'unité pastorale ou la prai
 - exploitants liés à la parcelle
 - mesures de gestion portant sur la parcelle
 
-## Génération des fichiers geojson
+## Installation et exploitation
+
+### Génération des fichiers geojson
 
 ```shell
 bin/getdata
@@ -75,19 +83,16 @@ bin/getdata
 
 construit les fichiers (geo)json utilisés par l'application.
 
-## Filtres
 
-Filtre regroupement d'exploitants
+### Déploiement
 
-Filtre Exploitant (la sélection d'un exploitant force le gex associé)
-
-## Déploiement
-
-Le fichier `dashboard.service` donne un exemple de service systemd pour le déploiement de l'application sur un serveur linux.
+Le fichier [dashboard.service](dashboard.service) donne un exemple de service systemd pour le déploiement de l'application sur un serveur linux.
 
 Le fichier est à adapter et à déposer dans le répertoire /etc/systemd/system
 
-## Base de données
+### Base de données
+
+Les données sont dans les schémas ag_pasto et PAEC de la base de données PostgreSQL (service projets).
 
 ### Unités pastorales
 
