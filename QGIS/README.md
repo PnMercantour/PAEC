@@ -3,19 +3,19 @@
 Le projet est hébergé sur le serveur postgresql accessible par le service `projets`.  
 Les tables sont enregistrées dans le schéma paec.
 
-Télécharger le [projet QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/QGIS/PAEC.qgz) avec toutes les couches
+Télécharger le [projet QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/PAEC.qgz) avec toutes les couches
 
 ## Prairies
 
 Prairies du schéma ag_pasto avec mention du service territorial (id_st) compétent.
 
-Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/QGIS/prairie.sql)
+Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/prairie.sql)
 
 ## Unités pastorales
 
 Unités pastorales du schéma ag_pasto avec mention du service territorial (id_st) compétent.
 
-Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/QGIS/up.sql)
+Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/up.sql)
 
 ## Flore
 
@@ -23,9 +23,9 @@ Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/P
 
 Observations détaillées postérieures à 1990 d'espèces de la liste paec.enjeu_flore.
 
-Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/QGIS/flore_observations.sql)
+Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_observations.sql)
 
-Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/QGIS/flore_observations.qlr)
+Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_observations.qlr)
 
 ## [flore_prairie_vm.sql]()
 
@@ -56,31 +56,31 @@ Prairies pour lesquelles un taxon remarquable a été observé à proximité (mo
 L'attribut taxons donne la liste des taxons observés, la proximité (en mètres) de chaque espèce est indiquée entre crochets.  
 Filtrage possible sur les attributs id_st, proximite (la distance du taxon le plus proche dans la liste), variete (nombre d'espèces observées dans la limite des 200m).
 
-Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/QGIS/flore_prairie.sql)
+Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_prairie.sql)
 
-Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/QGIS/flore_prairie.qlr)
+Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_prairie.qlr)
 
 ## [flore_up.sql]()
 
 Fonctionnement identique à flore_prairie.sql, appliqué aux unités pastorales.
 
-Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/QGIS/flore_up.sql)
+Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_up.sql)
 
-Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/QGIS/flore_up.qlr)
+Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_up.qlr)
 
 ## [flore_prairie_detail.sql]()
 
 Prairies (avec id, geom, id_st) et observations rattachées (proximite, cd_ref, nom_valide). Cette requête est conçue pour être filtrée sur l'un de ses attributs, elle retourne une ligne pour chaque couple (prairie, taxon)).  
 Le résultat de la requête flore_prairie.sql est plus synthétique (une ligne par prairie).
 
-Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/QGIS/flore_prairie_detail.sql)
+Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_prairie_detail.sql)
 
-Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/QGIS/flore_prairie_detail.qlr)
+Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_prairie_detail.qlr)
 
 ## [flore_up_detail.sql]()
 
 Fonctionnement identique à flore_prairie_detail.sql, appliqué aux unités pastorales.
 
-Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/QGIS/flore_up_detail.sql)
+Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_up_detail.sql)
 
-Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/QGIS/flore_up_detail.qlr)
+Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_up_detail.qlr)
