@@ -2,6 +2,8 @@
 
 Le projet est hébergé sur le serveur postgresql accessible par le service `projets`: schéma paec / projet PAEC.
 
+Les données numériques sont en unités SI (m, m2).
+
 Les couches individuelles du projet peuvent être récupérées en ouvrant le projet et en sauvegardant le ou les fichiers de description des couches, qu'il suffit ensuite de réimporter dans votre projet.  
 Des relations sont établies entre certaines couches, par exemple le lien entre les prairies04 et leur exploitant. Les relations doivent être restaurées par la fonction Projet/Propriétés/Relations. Découvrir et importer les relations utiles. Cette étape n'est pas nécessaire si vous utilisez le projet PAEC comme point de départ.
 
@@ -49,7 +51,7 @@ Observations détaillées postérieures à 1990 d'espèces de la liste paec.enje
 
 Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_observations.sql)
 
-## [flore_prairie_vm.sql](flore_prairie_vm.sql)
+### [flore_prairie_vm.sql](flore_prairie_vm.sql)
 
 Vue matérialisée (opération coûteuse) précalculée donnant la matrice de proximité prairie / taxon lorsque le taxon a été vu depuis 1990 à moins de 200m de la prairie.
 
@@ -68,11 +70,11 @@ sélectionne les triplets (prairie, taxon, proximite) dont la distance(prairie, 
 
 sélectionne les triplets (prairie, taxon, proximite) pour lesquels le taxon a été observé sur l'emprise de la prairie.
 
-## [flore_up_vm.sql](flore_up_vm.sql)
+### [flore_up_vm.sql](flore_up_vm.sql)
 
 Vue matérialisée. Fonctionnement identique à flore_prairie_vm, appliqué aux unités pastorales.
 
-## [flore_prairie.sql](flore_prairie.sql)
+### [flore_prairie.sql](flore_prairie.sql)
 
 Prairies pour lesquelles un taxon remarquable a été observé à proximité (moins de 200m) depuis 1990.  
 L'attribut taxons donne la liste des taxons observés, la proximité (en mètres) de chaque espèce est indiquée entre crochets.  
@@ -80,13 +82,13 @@ Filtrage possible sur les attributs id_st, proximite (la distance du taxon le pl
 
 Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_prairie.sql)
 
-## [flore_up.sql](flore_up.sql)
+### [flore_up.sql](flore_up.sql)
 
 Fonctionnement identique à flore_prairie.sql, appliqué aux unités pastorales.
 
 Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_up.sql)
 
-## [flore_prairie_detail.sql](flore_prairie_detail.sql)
+### [flore_prairie_detail.sql](flore_prairie_detail.sql)
 
 Prairies (avec id, geom, id_st) et observations rattachées (proximite, cd_ref, nom_valide, enjeu_espece, enjeu_habitat).  
 Cette requête est conçue pour être filtrée sur l'un de ses attributs, elle retourne une ligne pour chaque couple (prairie, taxon)).  
@@ -94,16 +96,26 @@ Le résultat de la requête flore_prairie.sql est plus synthétique (une ligne p
 
 Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_prairie_detail.sql)
 
-## [flore_up_detail.sql](flore_up_detail.sql)
+### [flore_up_detail.sql](flore_up_detail.sql)
 
 Fonctionnement identique à flore_prairie_detail.sql, appliqué aux unités pastorales.
 
 Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_up_detail.sql)
 
-## flore_prairie_04
+### flore_prairie_04
 
 Idem flore_prairie, pour le jeu de données prairie_04.
 
-Télécharger la [requête sql flore_prairie_4.sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_prairie_4.sql)
+Télécharger la [requête sql flore_prairie_4.sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_prairie_04.sql)
 
 Télécharger la [requête sql flore_prairie_04_detail.sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_prairie_04_detail.sql)
+
+## Zones humides
+
+Les données ZH sont issus du schéma zh de la base de données.
+
+Couche des sites supervisés, avec un résumé de l'état des zones humides et des actions entreprises pour chaque site.
+
+Télécharger la [requête sql zh_site.sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/zh_site.sql)
+
+Couche de localisation précise des zones humides (table eau_zh.zh).
