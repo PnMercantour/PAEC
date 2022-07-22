@@ -41,12 +41,12 @@ Les requêtes suivantes permettent de visualiser les mesures de gestion mises en
 
 ## Flore
 
-La liste des espèces à enjeu est enregistrée dans la table paec.enjeu_flore. Cette table peut être chargée dans QGIS (avec affichage du nom valide des espèces de la liste).  
+La liste des espèces remarquables est enregistrée dans la table paec.enjeu_flore. Cette table peut être chargée dans QGIS (avec affichage du nom valide des espèces de la liste).  
 L'attribut cd_ref dénote l'espèce.  
 L'attribut booléen enjeu_espece indique si l'espèce est à enjeu.  
 L'attribut booléen enjeu_habitat indique si l'espèce est caractéristique d'un habitat à enjeu.
 
-Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_especes_a_enjeu.sql)
+Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_especes_remarquables.sql)
 
 ### Observations (geonature)
 
