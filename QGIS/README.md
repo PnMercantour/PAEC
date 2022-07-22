@@ -32,7 +32,10 @@ Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PA
 
 ## Flore
 
-La liste des espèces à enjeu est enregistrée dans la table paec.enjeu_flore. Cette table peut être chargée dans QGIS (avec affichage du nom valide des espèces de la liste).
+La liste des espèces à enjeu est enregistrée dans la table paec.enjeu_flore. Cette table peut être chargée dans QGIS (avec affichage du nom valide des espèces de la liste).  
+L'attribut cd_ref dénote l'espèce.  
+L'attribut booléen enjeu_espece indique si l'espèce est à enjeu.  
+L'attribut booléen enjeu_habitat indique si l'espèce est caractéristique d'un habitat à enjeu.
 
 Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/flore_especes_a_enjeu.sql)
 
@@ -48,20 +51,20 @@ Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PA
 
 Vue matérialisée (opération coûteuse) précalculée donnant la matrice de proximité prairie / taxon lorsque le taxon a été vu depuis 1990 à moins de 200m de la prairie.
 
-Les attributs de la table sont id (prairie), cd_ref (taxon), proximite (proximité du taxon et de la prairie en mètres).  
+Les attributs de la table sont id (prairie), cd_ref (taxon), proximite (distance en mètres entre le taxon et la prairie).  
 Une jointure est nécessaire (voir plus bas les requêtes prêtes à l'emploi) pour accéder à la géométrie de la prairie ou aux données du taxon.
 
-Il est possible de filtrer les relations en indiquant une distance inférieure à 200m, par contre les observations distantes de plus de 200m ne peuvent pas être obtenues par cet outil (construire une requête personnalisée en s'inspirant du code).
+Il est possible de filtrer les relations en indiquant une distance inférieure à 200m, par contre les observations distantes de plus de 200m ne peuvent pas être obtenues par cet outil (construire une requête ou une vue personnalisée en s'inspirant du [code](flore_prairie_vm.sql).
 
 Exemples de filtrage:
 
     select * from paec.flore_prairie_vm where proximite <= 50;
 
-ne conserve que les triplets (prairie, taxon, distance) dont la distance est inférieure ou égale à 50m.
+sélectionne les triplets (prairie, taxon, proximite) dont la distance(prairie, taxon) est inférieure ou égale à 50m.
 
     select * from paec.flore_prairie_vm where proximite <= 50;
 
-pour ne conserver que les triplets pour lesquels le taxon a été observé sur l'emprise de la prairie.
+sélectionne les triplets (prairie, taxon, proximite) pour lesquels le taxon a été observé sur l'emprise de la prairie.
 
 ## [flore_up_vm.sql](flore_up_vm.sql)
 
