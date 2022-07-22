@@ -7,7 +7,8 @@ Les tables sont enregistrées dans le schéma paec. Des relations sont établies
 
 - schéma gn_synthese qui est une réplication mise à jour quotidiennement de la base de données geonature.
 
-Télécharger le [projet QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/PAEC.qgz) avec toutes les couches
+Télécharger le [projet QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/PAEC.qgz) avec toutes les couches.  
+La version courante du projet est également téléchargeable sur le serveur (service projets / schéma paec / projet PAEC).
 
 ## Prairies
 
@@ -29,6 +30,14 @@ Unités pastorales du schéma ag_pasto avec mention du service territorial (id_s
 Télécharger la [requête sql](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/up.sql)
 
 Télécharger la [couche QGIS](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/up.qlr)
+
+## MAEC
+
+Les requêtes suivantes permettent de visualiser les mesures de gestion mises en oeuvre lors du PAEC précédent.
+
+[Gestion des prés de fauche](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/mesure_fauche.sql)
+
+[Gestion du pastoralisme](https://raw.githubusercontent.com/PnMercantour/PAEC/master/QGIS/mesure_gestion_pastorale.sql)
 
 ## Flore
 
