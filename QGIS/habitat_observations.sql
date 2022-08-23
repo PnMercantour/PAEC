@@ -3,7 +3,7 @@ WITH taxref AS (
     taxref.*
   FROM
     taxonomie.taxref
-    JOIN paec.enjeu_flore USING (cd_ref) where enjeu_flore.enjeu_espece)
+    JOIN paec.enjeu_flore USING (cd_ref) where enjeu_flore.enjeu_habitat)
 SELECT
   id_synthese,
   cd_nom,

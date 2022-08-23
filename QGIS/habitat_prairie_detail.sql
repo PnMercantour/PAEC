@@ -1,3 +1,4 @@
+-- pour l'instant, pas de prairies à enjeu d'habitat!
 SELECT
   prairie.id,
   prairie.geom,
@@ -12,4 +13,4 @@ FROM
   JOIN taxonomie.taxref ON vue.cd_ref = cd_nom
   JOIN paec.enjeu_flore ON vue.cd_ref = enjeu_flore.cd_ref
 WHERE
-  enjeu_flore.enjeu_espece;
+  enjeu_flore.enjeu_habitat;
