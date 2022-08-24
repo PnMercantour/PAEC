@@ -7,6 +7,9 @@ with ups as (
 )
 select mesure.id,
     mesure.maec,
+    mgp.debut_contractualisation,
+    mgp.fin_contractualisation,
+    eun.detail engagement_unitaire,
     st.id_st,
     ups.ups,
     type_mesure_gestion.valeur type_mesure_gestion,
@@ -20,4 +23,6 @@ from ag_pasto.c_mesure_gestion_pastorale_meg mesure
     join ups using(id)
     join ag_pasto.tr_mesure_gestion_pastorale_mpa type_mesure_gestion on (
         mesure.type_mesure_gestion = type_mesure_gestion.id
-    );
+    )
+    join ag_pasto.t_maec_gestion_pastorale_mgp mgp on (mesure.maec = mgp.id)
+    left join ag_pasto.tr_engagement_unitaire_eun eun on (mgp.engagement_unitaire = eun.id);
