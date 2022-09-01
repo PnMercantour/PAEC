@@ -16,4 +16,5 @@ select site.id,
     extra.aire_optimale_adhesion
 from eau_zh.site
     join paec.eau_zh_site_vm extra using(id)
-    join eau_zh.bilan on site.id = bilan.id_site;
+    join eau_zh.bilan on site.id = bilan.id_site
+    where site.id not in (select id from paec.eau_zh_site_exclus);
