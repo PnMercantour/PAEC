@@ -1,1 +1,0 @@
-SELECT alteration.* FROM "eau_zh"."alteration" left join paec.eau_zh_site_exclus exclus on alteration.id_site = exclus.id where exclus.id is null;

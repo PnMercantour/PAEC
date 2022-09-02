@@ -1,3 +1,13 @@
+# Zones humides
+
+Les données relatives aux zones humides proviennent essentiellement du schema eau_zh.
+
+La table paec.eau_zh_exclus sert à exclure certains sites zh (et les zh, defens et altérations associés) du projet.
+
+Des vues permettent d'appliquer automatiquement le filtre d'exclusion. Par convention, la vue porte le même nom que la table filtrée avec le suffixe fx (filtre d'exclusion).
+
+    select * from paec.alteration_fx
+
 Les couches UP et prairies présentées dans le contexte zone humide ont les attributs suivants:
 
 - id de l'objet (UP ou prairie),
