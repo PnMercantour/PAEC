@@ -1,4 +1,4 @@
-create materialized view paec.lago_up_vm as WITH geo AS (
+create materialized view paec.faune_lago_up_extra as WITH geo AS (
     SELECT up.id,
         up.geom,
         up.surface
@@ -25,6 +25,4 @@ FROM geo
 group by geo.id,
     geo.surface,
     priorite with data;
-create index on paec.lago_up_vm(id);
-GRANT SELECT ON TABLE paec.lago_up_vm TO consult_agpasto;
-GRANT SELECT ON TABLE paec.lago_up_vm TO pnm_consult;
+create index on paec.faune_lago_up_extra(id);
