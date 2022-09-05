@@ -56,6 +56,16 @@ tl as(
         ) sources using(id)
     group by up.id
 ),
+entomo as(
+    select entomo_up.id,
+        count(*) nb_obs
+    from ag_pasto.vm_entomo_up entomo_up
+        left join paec.faune_entomo_exclus fee using (cd_ref)
+        join gn_synthese.synthese_avec_partenaires s USING (id_synthese)
+    where fee.cd_ref is null
+        and date_min >= '2000-01-01'
+    group by entomo_up.id
+),
 points as (
     select id,
         sum(points) score
@@ -75,6 +85,10 @@ points as (
             select id,
                 1 as points
             from tl
+            union all
+            select id,
+                1 as points
+            from entomo
         ) r
     group by id
 )
@@ -83,10 +97,12 @@ select up.*,
     zh.sites_zh,
     lago.surface_lago,
     bouquetin.sources hivernage_bouquetin,
-    tl.sources repro_tetras_lyre
+    tl.sources repro_tetras_lyre,
+    entomo.nb_obs nb_obs_entomo
 from up
     join points using(id)
     left join zh using(id)
     left join lago using(id)
     left join bouquetin using(id)
     left join tl using(id)
+    left join entomo using(id)
