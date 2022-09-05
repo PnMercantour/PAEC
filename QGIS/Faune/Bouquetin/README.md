@@ -9,3 +9,5 @@ Attributs de la couche up_hivernage
 - proportion de la surface de l'unité pastorale utilisée par les bouquetins
 
 Relevés GPS hivernaux
+
+On retient dans la synthèse les UP qui contiennent au moins 5ha de zone d'hivernage ou qui ont plus de 100 observations hivernales sur le territoire.
