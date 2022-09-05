@@ -1,9 +1,13 @@
-with zh as(
-    select up.id,
+with up as (
+    select *
+    from paec.ag_pasto_up
+),
+zh as(
+    select zh_up.id,
         array_agg(site.nom_site) sites_zh
-    from paec.eau_zh_up_fx up
-        join eau_zh.site on (up.id_site = site.id)
-    group by up.id
+    from paec.eau_zh_up_fx zh_up
+        join eau_zh.site on (zh_up.id_site = site.id)
+    group by zh_up.id
 ),
 lago as (
     select id,
@@ -26,7 +30,7 @@ bouquetin as (
     )
     select up.id,
         array_agg(source) sources
-    from paec.ag_pasto_up up
+    from up
         join (
             select *
             from from_bzh
@@ -34,6 +38,22 @@ bouquetin as (
             select *
             from from_gps
         ) sources using (id)
+    group by up.id
+),
+tl as(
+    with eon as (
+        select id,
+            'eon' as source
+        from paec.tetras_lyre_up_vm
+        where recouvrement > 0.1
+    )
+    select up.id,
+        array_agg(source) sources
+    from up
+        join (
+            select *
+            from eon
+        ) sources using(id)
     group by up.id
 ),
 points as (
@@ -51,6 +71,10 @@ points as (
             select id,
                 1 as points
             from bouquetin
+            union all
+            select id,
+                1 as points
+            from tl
         ) r
     group by id
 )
@@ -58,9 +82,11 @@ select up.*,
     points.score,
     zh.sites_zh,
     lago.surface_lago,
-    bouquetin.sources hivernage_bouquetin
-from paec.ag_pasto_up up
+    bouquetin.sources hivernage_bouquetin,
+    tl.sources repro_tetras_lyre
+from up
     join points using(id)
     left join zh using(id)
     left join lago using(id)
     left join bouquetin using(id)
+    left join tl using(id)
