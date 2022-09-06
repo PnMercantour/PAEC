@@ -66,12 +66,28 @@ entomo as(
         and date_min >= '2000-01-01'
     group by entomo_up.id
 ),
+flore as(
+    select id,
+        case
+            when (
+                super_priorite > 0
+                or priorite_1 > 1
+            ) then 3
+            when (priorite_1 > 0) then 2
+            when priorite_2 + priorite_3 > 3 then 1
+            else 0
+        end points
+    from paec.flore_up_synthese
+    where super_priorite > 0
+        or priorite_1 > 0
+        or priorite_2 + priorite_3 > 3
+),
 points as (
     select id,
         sum(points) score
     from (
             select id,
-                1 as points
+                2 as points
             from zh
             union all
             select id,
@@ -89,6 +105,10 @@ points as (
             select id,
                 1 as points
             from entomo
+            union all
+            select id,
+                points
+            from flore
         ) r
     group by id
 )
@@ -98,7 +118,8 @@ select up.*,
     lago.surface_lago,
     bouquetin.sources hivernage_bouquetin,
     tl.sources repro_tetras_lyre,
-    entomo.nb_obs nb_obs_entomo
+    entomo.nb_obs nb_obs_entomo,
+    flore.points points_flore
 from up
     join points using(id)
     left join zh using(id)
@@ -106,3 +127,4 @@ from up
     left join bouquetin using(id)
     left join tl using(id)
     left join entomo using(id)
+    left join flore using(id)
