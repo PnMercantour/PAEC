@@ -77,4 +77,4 @@ FROM eau_zh.site
   JOIN limregl.cr_pnm_services_territoriaux_topo st ON st_within(site.geom, st.geom)
 ORDER BY site.id WITH DATA;
 -- View indexes:
-CREATE INDEX eau_zh_site_vm_id_idx ON paec.eau_zh_site_extra USING btree (id);
+CREATE unique INDEX ON paec.eau_zh_site_extra(id);

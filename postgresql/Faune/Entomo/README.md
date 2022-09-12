@@ -34,3 +34,7 @@ Les vues de synthèse (une par type de territoire) donnent pour chaque territoir
 - le nombre d'espèces à enjeu fort
 - le nombre d'espèces à enjeu assez fort
 - la valeur max rencontrée pour chacun des attributs de sensibilité
+
+Les vues de synthèse sont directement exploitables dans QGIS
+
+Les relations `faune_entomo_rel*` servent à enrichir les formulaires QGIS des up et prairies avec les fiches des taxons observés.
