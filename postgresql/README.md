@@ -1,5 +1,7 @@
 # Structure de la base de données PostgreSQL
 
+Ce dossier contient la définition des tables, vues et vues matérialisées du schéma paec.
+
 ## Schéma paec
 
     alter default privileges in schema paec grant select on tables to pnm_consult, consult_agpasto, consult_eau;
