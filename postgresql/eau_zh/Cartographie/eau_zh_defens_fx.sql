@@ -6,8 +6,9 @@ SELECT defens.id,
     defens.surface,
     defens.nom_defens,
     defens.id_site,
-    defens.id_mgp
+    defens.id_mgp,
+    site.coeur,
+    site.aire_adhesion,
+    site.aire_optimale_adhesion
 FROM eau_zh.defens
-    LEFT JOIN paec.eau_zh_site_exclus exclus ON defens.id_site = exclus.id
-WHERE exclus.id IS NULL
-ORDER BY defens.id;
+    join paec.eau_zh_site_fx site on defens.id_site = site.id;
