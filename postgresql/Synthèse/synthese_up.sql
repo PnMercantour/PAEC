@@ -58,6 +58,8 @@ create or replace view paec.synthese_up as with geo as (
         group by id
     )
 select geo.*,
+    n2000.id_n2000,
+    n2000.surface_n2000,
     cumul.score,
     geo_zh.sites_zh,
     geo_lago.surface_lago,
@@ -69,6 +71,11 @@ select geo.*,
     geo_flore.score score_flore
 from geo
     join cumul using(id)
+    left join (
+        select *
+        from paec.ag_pasto_natura2000_cache
+        where type = 1
+    ) n2000 using(id)
     left join geo_zh using(id)
     left join geo_lago using(id)
     left join geo_bouquetin using(id)
